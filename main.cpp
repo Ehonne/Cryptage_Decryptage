@@ -35,6 +35,11 @@ int main(int argc, char *argv[])
     B.Supprimer(n);
     B.Affiche(B.racine, 0);
 
+    cout << endl;
+    // modification d'etiquette :
+    B.ModifierEtiquette(10, 1);
+    B.Affiche(B.racine, 0);
+
     QApplication a(argc, argv);
     MainWindow w;
     w.show();

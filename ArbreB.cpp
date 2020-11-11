@@ -147,3 +147,38 @@ Sommet* ArbreB::Recherche(int val)
 
     return NULL;
 }
+
+void ArbreB::ModifierEtiquette(int val1, int val2)
+{
+    Sommet * adn = Recherche(val1);
+    Sommet * gauche = adn->fils_gauche;
+    Sommet * droite = adn->fils_droite;
+
+    // Si on modifie l'étiquette de la racine :
+    if (adn == racine)
+    {
+        adn->valeur = val2;
+        if (gauche == NULL and droite == NULL)
+        {
+            Supprimer(adn);
+            Ajouter(val2);
+        }
+        else if(val2 < adn->fils_gauche->valeur)
+        {
+            Supprimer(adn->fils_gauche);
+            if (gauche != NULL) Inserer(gauche);
+        }
+        if(val2 > adn->fils_droite->valeur)
+        {
+            Supprimer(adn->fils_droite);
+            if (droite != NULL) Inserer(droite);
+        }
+    }
+    else
+    {
+        // On supprime le Sommet avec l'étiquette val1
+        // et on ajoute un nouveau sommet d'étiquette val2
+        Supprimer(adn);
+        Ajouter(val2);
+    }
+}
