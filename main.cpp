@@ -39,14 +39,14 @@ int main(int argc, char *argv[])
     cout << "Arbre B sans 8:" << endl;
     B.Affiche(B.racine, 0);
 
-<<<<<<< Updated upstream
+
     cout << endl;
 
     // modification d'etiquette :
     cout << "on modifie 10 par 1 : \n";
     B.ModifierEtiquette(10, 1);
     B.Affiche(B.racine, 0);
-=======
+
     // Addition de 2 arbre :
     ArbreB A;
     A.Ajouter(15);      A.Ajouter(4);    A.Ajouter(9);
@@ -58,7 +58,7 @@ int main(int argc, char *argv[])
     C.Affiche(C.racine,0);
     A.Affiche(A.racine,0);
 
->>>>>>> Stashed changes
+
 
 
     cout << "nb de sommet de l'arbre B : " << B.getNbSommet() << endl;

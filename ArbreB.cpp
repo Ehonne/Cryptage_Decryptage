@@ -161,7 +161,7 @@ Sommet* ArbreB::Recherche(int val)
     return NULL;
 }
 
-<<<<<<< Updated upstream
+
 void ArbreB::ModifierEtiquette(int val1, int val2)
 {
     Sommet * adn = Recherche(val1);
@@ -196,16 +196,7 @@ void ArbreB::ModifierEtiquette(int val1, int val2)
         Ajouter(val2);
     }
 }
-<<<<<<< HEAD
 
-
-
-
-
-
-
-=======
-=======
 
 Sommet* addition(Sommet * A, Sommet *B)
 {
@@ -229,5 +220,4 @@ ArbreB operator+(ArbreB A, ArbreB B)
     return Tempon;
 }
 
->>>>>>> Stashed changes
->>>>>>> 548f0fcf2488cb011377cf34aede72cd4808661a
+
