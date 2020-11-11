@@ -27,6 +27,7 @@ int main(int argc, char *argv[])
 
     // suppression du sommet recherché :
     B.Supprimer(ptr);
+    cout << "Arbre B sans 1:" << endl;
     B.Affiche(B.racine, 0);
 
     cout << endl;
@@ -35,14 +36,29 @@ int main(int argc, char *argv[])
     Sommet * n = B.Recherche(8);
     if (n != NULL) cout << "Sommet trouvé : " << n->valeur << endl;
     B.Supprimer(n);
+    cout << "Arbre B sans 8:" << endl;
     B.Affiche(B.racine, 0);
 
+<<<<<<< Updated upstream
     cout << endl;
 
     // modification d'etiquette :
     cout << "on modifie 10 par 1 : \n";
     B.ModifierEtiquette(10, 1);
     B.Affiche(B.racine, 0);
+=======
+    // Addition de 2 arbre :
+    ArbreB A;
+    A.Ajouter(15);      A.Ajouter(4);    A.Ajouter(9);
+    cout << "Arbre A:" << endl;
+    A.Affiche(A.racine,0);
+
+    ArbreB C = A+B;
+    cout << "Arbre C (addition de A et B):" << endl;
+    C.Affiche(C.racine,0);
+    A.Affiche(A.racine,0);
+
+>>>>>>> Stashed changes
 
 
     cout << "nb de sommet de l'arbre B : " << B.getNbSommet() << endl;
