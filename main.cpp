@@ -19,6 +19,8 @@ int main(int argc, char *argv[])
     B.Ajouter(6);
     B.Affiche(B.racine,0);
 
+
+
     // On recherche le sommmet dont l'étiquette est de valeur 1 :
     Sommet * ptr = B.Recherche(1);
     if (ptr != NULL) cout << "Sommet trouvé : " << ptr->valeur << endl;
@@ -36,10 +38,19 @@ int main(int argc, char *argv[])
     B.Affiche(B.racine, 0);
 
     cout << endl;
+
     // modification d'etiquette :
+    cout << "on modifie 10 par 1 : \n";
     B.ModifierEtiquette(10, 1);
     B.Affiche(B.racine, 0);
 
+
+    cout << "nb de sommet de l'arbre B : " << B.getNbSommet() << endl;
+
+
+
+
+/****************************************************/
     QApplication a(argc, argv);
     MainWindow w;
     w.show();

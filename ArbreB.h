@@ -11,11 +11,13 @@
 
 class ArbreB {
 private:
+    int nbSommet;
 public:
     Sommet *racine;		//Racine de l'arbre
     ArbreB();
     virtual ~ArbreB();
 
+    int getNbSommet();
     void Ajouter(int val);		// ajoute un sommet de valeur val
     void Inserer(Sommet * nouveau);
     void Supprimer(Sommet * del);		// supprime un sommet

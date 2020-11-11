@@ -12,13 +12,18 @@ using namespace std;
 
 ArbreB::ArbreB() {
     racine = NULL;
+    nbSommet = 0;
 }
 
 ArbreB::~ArbreB() {
     // TODO Auto-generated destructor stub
 }
 
-
+// getter :
+int ArbreB::getNbSommet()
+{
+    return nbSommet;
+}
 
 
 void ArbreB::Affiche(Sommet *courant, int prof)
@@ -38,6 +43,9 @@ void ArbreB::Affiche(Sommet *courant, int prof)
 
 void ArbreB::Ajouter(int val)
 {
+    // on incrémente le nombre de sommet de l'arbre :
+    nbSommet++;
+
     // création d'un nouveau sommet, allocation de la mémoire :
     Sommet * nouveau_sommet = new Sommet;
     nouveau_sommet->fils_gauche = NULL;
@@ -122,6 +130,9 @@ void ArbreB::Supprimer(Sommet * del)
     if(gauche != NULL) Inserer(gauche);
 
     delete del;
+
+    // on décrémente le nb de Sommet de l'arbre :
+    nbSommet--;
 }
 
 Sommet* ArbreB::Recherche(int val)
@@ -182,3 +193,10 @@ void ArbreB::ModifierEtiquette(int val1, int val2)
         Ajouter(val2);
     }
 }
+
+
+
+
+
+
+
