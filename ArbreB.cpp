@@ -6,7 +6,9 @@
  */
 
 #include "ArbreB.h"
+#include <vector>
 #include <iostream>
+#include <stack>
 
 using namespace std;
 
@@ -148,6 +150,7 @@ Sommet* ArbreB::Recherche(int val)
     return NULL;
 }
 
+<<<<<<< Updated upstream
 void ArbreB::ModifierEtiquette(int val1, int val2)
 {
     Sommet * adn = Recherche(val1);
@@ -182,3 +185,28 @@ void ArbreB::ModifierEtiquette(int val1, int val2)
         Ajouter(val2);
     }
 }
+=======
+
+Sommet* addition(Sommet * A, Sommet *B)
+{
+    if (!A)
+        return B;
+    if (!B)
+        return A;
+    A->valeur += B->valeur;
+    A->fils_gauche = addition(A->fils_gauche, B->fils_gauche);
+    A->fils_droite = addition(A->fils_droite, B->fils_droite);
+    return A;
+}
+ArbreB operator+(ArbreB A, ArbreB B)
+{
+    //Création du nouvelle arbre
+    ArbreB NOUV = A;
+    ArbreB Tempon;
+
+    Tempon.racine = addition(NOUV.racine, B.racine);
+
+    return Tempon;
+}
+
+>>>>>>> Stashed changes
