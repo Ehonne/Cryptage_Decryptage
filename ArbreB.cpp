@@ -243,8 +243,6 @@ ArbreB operator+(ArbreB& A, ArbreB& B)
     return Tempon;
 }
 
-<<<<<<< HEAD
-=======
 // operateur d'affectation :
 ArbreB& ArbreB::operator=(ArbreB &abr)
 {
@@ -287,4 +285,3 @@ bool operator != (ArbreB& abr1,  ArbreB& abr2)
 {
     return !(abr1 == abr2);
 }
->>>>>>> ab56503687373b34ab65a277a4def9344ca7eea6

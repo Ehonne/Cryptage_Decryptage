@@ -62,12 +62,9 @@ int main(int argc, char *argv[])
     if (A == C) cout << "l'arbre A est identique à l'arbre binaire B \n";
     else cout << "A est different de B \n";
 
-<<<<<<< HEAD
+
     cout << "nb de sommet de l'arbre B : " << B.getNbSommet() << endl;
 
-
-
-=======
     cout << endl;
     ArbreB nouv;
     nouv.Ajouter(1);
@@ -76,7 +73,6 @@ int main(int argc, char *argv[])
     nouv.Ajouter(-2);
     B = nouv;
     B.Affiche(B.racine, 0);
->>>>>>> ab56503687373b34ab65a277a4def9344ca7eea6
 
 /****************************************************/
 
