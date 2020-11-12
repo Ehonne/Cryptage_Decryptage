@@ -39,7 +39,6 @@ int main(int argc, char *argv[])
     cout << "Arbre B sans 8:" << endl;
     B.Affiche(B.racine, 0);
 
-
     cout << endl;
 
     // modification d'etiquette :
@@ -60,13 +59,13 @@ int main(int argc, char *argv[])
 
 
 
-
     cout << "nb de sommet de l'arbre B : " << B.getNbSommet() << endl;
 
 
 
 
 /****************************************************/
+
     QApplication a(argc, argv);
     MainWindow w;
     w.show();

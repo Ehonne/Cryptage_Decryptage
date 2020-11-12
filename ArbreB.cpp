@@ -220,4 +220,3 @@ ArbreB operator+(ArbreB A, ArbreB B)
     return Tempon;
 }
 
-
