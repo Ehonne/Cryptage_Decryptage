@@ -11,6 +11,7 @@ class MainWindow : public QWidget {
 
     protected:
         void paintEvent(QPaintEvent* e);
+        void affiche_arbre(ArbreB B);
     signals:
 
     public slots:
