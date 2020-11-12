@@ -21,10 +21,15 @@ ArbreB::~ArbreB() {
     // TODO Auto-generated destructor stub
 }
 
-// getter :
+// getter and setter :
 int ArbreB::getNbSommet()
 {
     return nbSommet;
+}
+
+void ArbreB::setNbSommet(int val)
+{
+    nbSommet = val;
 }
 
 
@@ -198,6 +203,18 @@ void ArbreB::ModifierEtiquette(int val1, int val2)
 }
 
 
+void ArbreB::parcoursPrefixe(Sommet *sommet)
+{
+    if (sommet != NULL)
+    {
+       pile.push_back(sommet->valeur);
+
+       parcoursPrefixe(sommet->fils_droite);
+       parcoursPrefixe(sommet->fils_gauche);
+    }
+}
+
+
 Sommet* addition(Sommet * A, Sommet *B)
 {
     if (!A)
@@ -209,15 +226,62 @@ Sommet* addition(Sommet * A, Sommet *B)
     A->fils_droite = addition(A->fils_droite, B->fils_droite);
     return A;
 }
-ArbreB operator+(ArbreB A, ArbreB B)
+
+ArbreB operator+(ArbreB& A, ArbreB& B)
 {
     //Création du nouvelle arbre
-    ArbreB NOUV = A;
     ArbreB Tempon;
+    Tempon = A;
 
-    Tempon.racine = addition(NOUV.racine, B.racine);
+    B.parcoursPrefixe(B.racine);
+
+    for(int i(0); i<B.getNbSommet(); ++i)
+    {
+        Tempon.Ajouter(B.pile[i]);
+    }
 
     return Tempon;
 }
 
+// operateur d'affectation :
+ArbreB& ArbreB::operator=(ArbreB &abr)
+{
 
+    if(racine != NULL)
+    {
+        for(int i(0); i<nbSommet; ++i)
+        {
+            if (racine) Supprimer(racine);
+        }
+        delete racine;
+    }
+
+    abr.parcoursPrefixe(abr.racine);
+
+    for(int i(0); i<abr.getNbSommet(); ++i)
+    {
+        Ajouter(abr.pile[i]);
+    }
+
+    return *this;
+}
+
+bool operator==(ArbreB& abr1, ArbreB& abr2)
+{
+    if (abr1.getNbSommet() != abr2.getNbSommet()) return false;
+    else {
+        abr1.parcoursPrefixe(abr1.racine);
+        abr2.parcoursPrefixe(abr2.racine);
+
+        for(int i(0); i<abr1.getNbSommet(); ++i)
+        {
+            if (abr1.pile[i] != abr2.pile[i]) return false;
+        }
+        return true;
+    }
+}
+
+bool operator != (ArbreB& abr1,  ArbreB& abr2)
+{
+    return !(abr1 == abr2);
+}

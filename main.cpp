@@ -1,5 +1,5 @@
 #include "mainwindow.h"
-
+#include <vector>
 #include <QApplication>
 #include "ArbreB.h"
 #include "iostream"
@@ -59,12 +59,18 @@ int main(int argc, char *argv[])
     A.Affiche(A.racine,0);
 
 
+    cout << "\n\n";
+    if (A == C) cout << "l'arbre A est identique à l'arbre binaire B \n";
+    else cout << "A est different de B \n";
 
-
-    cout << "nb de sommet de l'arbre B : " << B.getNbSommet() << endl;
-
-
-
+    cout << endl;
+    ArbreB nouv;
+    nouv.Ajouter(1);
+    nouv.Ajouter(2);
+    nouv.Ajouter(3);
+    nouv.Ajouter(-2);
+    B = nouv;
+    B.Affiche(B.racine, 0);
 
 /****************************************************/
     QApplication a(argc, argv);
