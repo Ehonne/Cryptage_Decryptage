@@ -5,16 +5,33 @@
 #include <QWidget>
 #include "QPainter"
 #include <ArbreB.h>
+#include <QPushButton>
 
-class MainWindow : public QWidget {
+class MainWindow : public QWidget
+{
+    Q_OBJECT
+public:
+    MainWindow(QWidget* parent = 0);
 
+protected:
+    void paintEvent(QPaintEvent * event);
+    void affiche_arbre(ArbreB B);
 
-    protected:
-        void paintEvent(QPaintEvent* e);
-        void affiche_arbre(ArbreB B);
-    signals:
+public slots:
+    void doPainting();
+    void doPainting_ajout();
+    void doPainting_supp();
 
-    public slots:
+private:
+     QPushButton *m_bouton;
+     QPushButton *m_bouton_ajout;
+     QPushButton *m_bouton_supp;
+     bool state_bouton;
+     bool state_bouton_ajout;
+     bool state_bouton_supp;
+     ArbreB courant;
+     ArbreB courant_ajout;
+     ArbreB courant_supp;
 
 };
 

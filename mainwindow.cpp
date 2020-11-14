@@ -286,11 +286,21 @@ void MainWindow::affiche_arbre(ArbreB B)
     }
 }
 
-
-void MainWindow::paintEvent(QPaintEvent *event)
+MainWindow::MainWindow(QWidget *parent)
 {
-
-    setFixedSize(600, 600);
+    setFixedSize(600,600);
+    state_bouton = false;
+    state_bouton_ajout = false;
+    state_bouton_supp = false;
+    m_bouton = new QPushButton("Afficher Arbre", this);
+    m_bouton->setFont(QFont("Comic Sans MS", 10));
+    m_bouton->move(250, 550);
+    m_bouton_ajout = new QPushButton("Ajout valeur Arbre", this);
+    m_bouton_ajout->setFont(QFont("Comic Sans MS", 10));
+    m_bouton_ajout->move(50, 550);
+    m_bouton_supp = new QPushButton("Supprimer valeur Arbre", this);
+    m_bouton_supp->setFont(QFont("Comic Sans MS", 10));
+    m_bouton_supp->move(400, 550);
 
 
     ArbreB B;
@@ -298,8 +308,17 @@ void MainWindow::paintEvent(QPaintEvent *event)
     B.Ajouter(8);
     B.Ajouter(2);
     B.Ajouter(0);
+    courant = B;
     B.Ajouter(10);
     B.Ajouter(6);
+
+
+    cout << "----------------------------------------------------------------------------" << endl;
+    B.Affiche(B.racine,0);
+    courant_ajout = B;
+    courant_ajout.Affiche(courant_ajout.racine,0);
+    cout << "----------------------------------------------------------------------------" << endl;
+
     B.Ajouter(3);
     B.Ajouter(4);
     B.Ajouter(7);
@@ -309,16 +328,46 @@ void MainWindow::paintEvent(QPaintEvent *event)
     B.Ajouter(-1);
     B.Affiche(B.racine,0);
 
-   // affiche_arbre(B);
-
     Sommet * ptr = B.Recherche(1);
 
     B.Supprimer(ptr);
-    B.Affiche(B.racine,0);
-    affiche_arbre(B);
+    courant_supp = B;
 
+
+    // Connexion du clic du bouton à l'affichage de l'arbre
+    QObject::connect(m_bouton, SIGNAL(clicked()), this, SLOT(doPainting()));
+    QObject::connect(m_bouton_ajout, SIGNAL(clicked()), this, SLOT(doPainting_ajout()));
+    QObject::connect(m_bouton_supp, SIGNAL(clicked()), this, SLOT(doPainting_supp()));
+}
+
+void MainWindow::paintEvent(QPaintEvent *event)
+{
+    //QPushButton::paintEvent(event);
+    if(state_bouton){
+        affiche_arbre(courant);
+    }
+    if(state_bouton_ajout){
+        affiche_arbre(courant_ajout);
+    }
+    if(state_bouton_supp){
+        affiche_arbre(courant_supp);
+    }
 
 }
 
-
+void MainWindow::doPainting()
+{
+    state_bouton = !state_bouton;
+    update();
+}
+void MainWindow::doPainting_ajout()
+{
+    state_bouton_ajout = !state_bouton_ajout;
+    update();
+}
+void MainWindow::doPainting_supp()
+{
+    state_bouton_supp = !state_bouton_supp;
+    update();
+}
 
