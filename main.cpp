@@ -76,6 +76,17 @@ int main(int argc, char *argv[])
     B.Affiche(B.racine, 0);
     cout << "l'abre nouv : \n";
     nouv.Affiche(nouv.racine, 0);
+
+
+    ArbreB test;
+    nouv.decomposition(test, 2);
+    cout << "Arbre nouv après decomposition : \n";
+    nouv.Affiche(nouv.racine, 0);
+    cout << "Arbre test après décomposition de nouv : \n";
+    test.Affiche(test.racine, 0);
+
+
+
 /****************************************************/
 
     QApplication a(argc, argv);

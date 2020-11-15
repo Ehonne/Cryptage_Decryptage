@@ -19,6 +19,7 @@ ArbreB::ArbreB() {
 
 ArbreB::~ArbreB() {
     // TODO Auto-generated destructor stub
+
 }
 
 // getter and setter :
@@ -286,4 +287,37 @@ bool operator==(ArbreB& abr1, ArbreB& abr2)
 bool operator != (ArbreB& abr1,  ArbreB& abr2)
 {
     return !(abr1 == abr2);
+}
+
+
+// definition de la fonction de décomposition d'un arbre binaire :
+ArbreB& ArbreB::decomposition(ArbreB& abr, int valeur)
+{
+    // On cherche le sommet à partir duquel on veut decomposer abr :
+    Sommet * ptr = Recherche(valeur);
+
+    if (ptr == racine)
+    {
+      parcoursPrefixe(ptr->fils_gauche);
+    }
+    else {
+        // on stocke les valeurs en dessous du sommet ptr :
+        parcoursPrefixe(ptr);
+    }
+
+    // On ajoute ces valeurs à notre nouvel arbre "abr" :
+    for(int i(0); i<(int)(pile.size()); ++i)
+    {
+        abr.Ajouter(pile[i]);
+    }
+
+    // Puis, on supprime les sommets devenus inutiles à l'arbre "abr" :
+    for(int i(0); i<(int)(pile.size()); ++i)
+    {
+        Sommet * ancien = Recherche(pile[i]);
+        if (ancien) Supprimer(ancien);
+    }
+
+    // on retourne notre nouvel arbre :
+    return *this;
 }

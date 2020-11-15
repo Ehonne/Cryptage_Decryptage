@@ -38,6 +38,8 @@ public:
     friend bool operator==(ArbreB& abr1,  ArbreB& abr2);
     friend bool operator!=(ArbreB& abr1,  ArbreB& abr2);
 
+    // fonction membre de décomposition :
+    ArbreB& decomposition(ArbreB& abr, int valeur);
 };
 
 #endif /* ARBREB_H_ */
