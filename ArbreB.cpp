@@ -263,6 +263,8 @@ ArbreB& ArbreB::operator=(ArbreB &abr)
         Ajouter(abr.pile[i]);
     }
 
+    if(abr.racine != NULL) abr.pile.clear();
+
     return *this;
 }
 

@@ -313,11 +313,6 @@ MainWindow::MainWindow(QWidget *parent)
     B.Ajouter(6);
 
 
-    cout << "----------------------------------------------------------------------------" << endl;
-    B.Affiche(B.racine,0);
-    courant_ajout = B;
-    courant_ajout.Affiche(courant_ajout.racine,0);
-    cout << "----------------------------------------------------------------------------" << endl;
 
     B.Ajouter(3);
     B.Ajouter(4);
@@ -326,6 +321,8 @@ MainWindow::MainWindow(QWidget *parent)
     B.Ajouter(9);
     B.Ajouter(11);
     B.Ajouter(-1);
+
+    courant_ajout = B;
     B.Affiche(B.racine,0);
 
     Sommet * ptr = B.Recherche(1);

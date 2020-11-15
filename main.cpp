@@ -72,8 +72,10 @@ int main(int argc, char *argv[])
     nouv.Ajouter(3);
     nouv.Ajouter(-2);
     B = nouv;
+    cout << "l'abre B : \n";
     B.Affiche(B.racine, 0);
-
+    cout << "l'abre nouv : \n";
+    nouv.Affiche(nouv.racine, 0);
 /****************************************************/
 
     QApplication a(argc, argv);
