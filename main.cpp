@@ -19,8 +19,6 @@ int main(int argc, char *argv[])
     B.Ajouter(6);
     B.Affiche(B.racine,0);
 
-
-
     // On recherche le sommmet dont l'étiquette est de valeur 1 :
     Sommet * ptr = B.Recherche(1);
     if (ptr != NULL) cout << "Sommet trouvé : " << ptr->valeur << endl;

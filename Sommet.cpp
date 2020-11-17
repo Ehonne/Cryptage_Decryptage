@@ -11,6 +11,7 @@
 
 Sommet::Sommet() {
     valeur = 0;
+    profondeur = 0;
     fils_droite = NULL;
     fils_gauche = NULL;
 

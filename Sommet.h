@@ -12,6 +12,7 @@ class Sommet {
 
 
 public:
+    int profondeur;     //Profondeur du sommet
     int valeur;		//Valeur du sommet
     Sommet *fils_gauche;		//Sommet gauche
     Sommet *fils_droite;		//Sommet droite

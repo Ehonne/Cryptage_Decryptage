@@ -11,6 +11,9 @@ class MainWindow : public QWidget
 {
     Q_OBJECT
 public:
+    ArbreB courant;
+    ArbreB courant_ajout;
+    ArbreB courant_supp;
     MainWindow(QWidget* parent = 0);
 
 protected:
@@ -29,9 +32,7 @@ private:
      bool state_bouton;
      bool state_bouton_ajout;
      bool state_bouton_supp;
-     ArbreB courant;
-     ArbreB courant_ajout;
-     ArbreB courant_supp;
+
 
 };
 

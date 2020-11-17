@@ -66,12 +66,13 @@ void ArbreB::Ajouter(int val)
 
 void ArbreB::Inserer(Sommet * nouveau)
 {
-
+    int cpt = 1;
     if (!nouveau) return;		//Si le sommet est nul, on sort
 
 
     if (racine == NULL)		//Si l'arbre est vide, on lui accroche le sommet et on sort
     {
+        nouveau->profondeur = cpt;
         racine = nouveau;
         return;
     }
@@ -84,6 +85,7 @@ void ArbreB::Inserer(Sommet * nouveau)
     //precedent memorise l'adresse du dernier Sommet visité
     while (courant)
     {
+        cpt++;
         precedent = courant;
         if (nouveau->valeur < courant->valeur)
             courant = courant->fils_gauche;
@@ -91,6 +93,7 @@ void ArbreB::Inserer(Sommet * nouveau)
             courant = courant->fils_droite;
     }
 
+    nouveau->profondeur = cpt;
     //Maintenant on place le nouveau noeud dans la bonne branche
     if(nouveau->valeur < precedent->valeur)
         precedent->fils_gauche = nouveau;

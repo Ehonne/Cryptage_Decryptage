@@ -66,7 +66,7 @@ void MainWindow::affiche_arbre(ArbreB B)
 
         //traitement du sommet :
         //cout << "Level of "<< n->valeur << " is " << getLevel(B.racine, n->valeur) << endl;
-        switch(getLevel(B.racine, n->valeur))   //Derterminer a quel etage de l'arbre on se trouve (profondeur)
+        switch(n->profondeur)   //Derterminer a quel etage de l'arbre on se trouve (profondeur)
         {
             case 1: {       //Profondeur 1
                 const QRect rectangle = QRect(265, 25, 50, 50);
@@ -234,20 +234,26 @@ void MainWindow::affiche_arbre(ArbreB B)
                 Sommet * vide = new Sommet;    Sommet* vide2 = new Sommet; //Sommet fantome
                 vide->fils_droite = NULL;       vide2->fils_droite = NULL;
                 vide->fils_gauche = NULL;       vide2->fils_gauche = NULL;
-                if(getLevel(B.racine, n->valeur) == 2)
+                if(n->profondeur == 2)
                 {
                     vide->valeur = 33333;       //Valeur aberante pour profondeur 2;
                     vide2->valeur = 33333;
+                    vide->profondeur = 3;
+                    vide2->profondeur = 3;
                 }
-                if(getLevel(B.racine, n->valeur) == 3)
+                if(n->profondeur == 3)
                 {
                     vide->valeur = 44444;       //Valeur aberante pour profondeur 3;
                     vide2->valeur = 44444;
+                    vide->profondeur = 4;
+                    vide2->profondeur = 4;
                 }
-                if(getLevel(B.racine, n->valeur) == 4)
+                if(n->profondeur == 4)
                 {
                     vide->valeur = 55555;       //Valeur aberante pour profondeur 4;
                     vide2->valeur = 55555;
+                    vide->profondeur = 5;
+                    vide2->profondeur = 5;
                 }
                 fifo.push(vide);
                 fifo.push(vide2);
@@ -262,21 +268,21 @@ void MainWindow::affiche_arbre(ArbreB B)
 
             if((n->fils_droite == NULL) && (n->fils_gauche != NULL))
             {
-                if(getLevel(B.racine, n->fils_gauche->valeur) == 2)
-                    vide->valeur = 22222;       //Valeur aberante pour profondeur 2;
-                if(getLevel(B.racine, n->fils_gauche->valeur) == 3)
-                    vide->valeur = 33333;       //Valeur aberante pour profondeur 3;
-                if(getLevel(B.racine, n->fils_gauche->valeur) == 4)
-                    vide->valeur = 44444;       //Valeur aberante pour profondeur 4;
+                if(n->fils_gauche->profondeur == 2)
+                {   vide->valeur = 22222;    vide->profondeur = 2;}       //Valeur aberante pour profondeur 2;
+                if(n->fils_gauche->profondeur == 3)
+                {   vide->valeur = 33333;    vide->profondeur = 3;}       //Valeur aberante pour profondeur 3;
+                if(n->fils_gauche->profondeur == 4)
+                {   vide->valeur = 44444;    vide->profondeur = 4;}       //Valeur aberante pour profondeur 4;
             }
             if((n->fils_droite != NULL) && (n->fils_gauche == NULL))
             {
-                if(getLevel(B.racine, n->fils_droite->valeur) == 2)
-                    vide->valeur = 22222;       //Valeur aberante pour profondeur 2;
-                if(getLevel(B.racine, n->fils_droite->valeur) == 3)
-                    vide->valeur = 33333;       //Valeur aberante pour profondeur 3;
-                if(getLevel(B.racine, n->fils_droite->valeur) == 4)
-                    vide->valeur = 44444;       //Valeur aberante pour profondeur 4;
+                if(n->fils_droite->profondeur == 2)
+                {   vide->valeur = 22222;    vide->profondeur = 2;}  //Valeur aberante pour profondeur 2;
+                if(n->fils_droite->profondeur == 3)
+                {   vide->valeur = 33333;    vide->profondeur = 3;}       //Valeur aberante pour profondeur 3;
+                if(n->fils_droite->profondeur == 4)
+                {   vide->valeur = 44444;    vide->profondeur = 4;}       //Valeur aberante pour profondeur 4;
             }
 
             fifo.push(vide);
