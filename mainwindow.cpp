@@ -9,40 +9,9 @@
 
 using namespace std;
 
-
-
-
-int getLevelUtil(Sommet *node,  int data, int level)    // Obtenir l'etage d'un sommet
-{
-    if (node == NULL)
-        return 0;
-
-    if (node->valeur == data)
-        return level;
-
-    int downlevel = getLevelUtil(node->fils_gauche, data, level + 1);
-    if (downlevel != 0)
-        return downlevel;
-
-    downlevel = getLevelUtil(node->fils_droite, data, level + 1);
-    return downlevel;
-}
-int getLevel(Sommet *node, int data)
-{
-    if(data == 33333) //Si on a un fantome d'etage 3
-           return 3;
-    if(data == 22222) //Si on a un fantome d'etage 2
-           return 2;
-    if(data == 44444) //Si on a un fantome d'etage 4
-           return 4;
-    return getLevelUtil(node, data, 1);
-}
-
-
 //On fait un parcour en largeur de l'arbre de facons a le dessiner etage par etage. Pour se faire on stoke la racine de l'arbre dans une pile.
 // puis des que l'on va depiler on va dessiner le sommet avec son lien a son pere, puis on va ajouter ses fils dans la pile
 // Enfin pour des raisons d'affichage on rajoute des sommet fantome (sans valeur ni fils).
-// ATTENTION L'AFFICHAGE NE PEUX PAS PRENDRE EN CHARGE DES ARBRES OU 2(ou +) VALEURS SONT EGALES
 void MainWindow::affiche_arbre(ArbreB B)
 {
     int etage_2 = 125;
@@ -65,7 +34,6 @@ void MainWindow::affiche_arbre(ArbreB B)
         fifo.pop();                     //On supprime de la file le sommet que l'on va traiter
 
         //traitement du sommet :
-        //cout << "Level of "<< n->valeur << " is " << getLevel(B.racine, n->valeur) << endl;
         switch(n->profondeur)   //Derterminer a quel etage de l'arbre on se trouve (profondeur)
         {
             case 1: {       //Profondeur 1
@@ -317,9 +285,6 @@ MainWindow::MainWindow(QWidget *parent)
     courant = B;
     B.Ajouter(10);
     B.Ajouter(6);
-
-
-
     B.Ajouter(3);
     B.Ajouter(4);
     B.Ajouter(7);

@@ -17,8 +17,18 @@ ArbreB::ArbreB() {
     nbSommet = 0;
 }
 
+void ArbreB::DestroyRecursive(Sommet *B)
+{
+       if (B)
+       {
+           DestroyRecursive(B->fils_gauche);
+           DestroyRecursive(B->fils_droite);
+           delete B;
+       }
+}
 ArbreB::~ArbreB() {
-    // TODO Auto-generated destructor stub
+    //cout << "Appel des destructeurs" << endl;
+    DestroyRecursive(racine);
 
 }
 

@@ -17,7 +17,9 @@ private:
 public:
     Sommet *racine;		//Racine de l'arbre
     vector<int> pile;
+
     ArbreB();
+    void DestroyRecursive(Sommet *B);
     virtual ~ArbreB();
 
     int getNbSommet();
@@ -26,7 +28,7 @@ public:
     void Inserer(Sommet * nouveau);
     void Supprimer(Sommet * del);		// supprime un sommet
     Sommet* Recherche(int val);		// Recherche un sommet dans l'arbre
-    void Affiche(Sommet * courant, int prof);
+    void Affiche(Sommet * courant, int prof);   //Affiche dans le terminal
     void ModifierEtiquette(int val1, int val2);
 
     // parcours préfixe :
