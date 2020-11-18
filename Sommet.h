@@ -10,6 +10,10 @@
 
 class Sommet {
 
+private:
+    // compteur d'objet de type Sommet :
+    static int compteurS;
+
 
 public:
     int profondeur;     //Profondeur du sommet
@@ -18,6 +22,9 @@ public:
     Sommet *fils_droite;		//Sommet droite
     Sommet();
     virtual ~Sommet();
+
+    // fonction static pour l'attribut compteurS :
+    static int nbObjetSommet();
 };
 
 #endif /* SOMMET_H_ */

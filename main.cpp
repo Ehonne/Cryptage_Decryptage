@@ -50,15 +50,17 @@ int main(int argc, char *argv[])
     cout << "Arbre A:" << endl;
     A.Affiche(A.racine,0);
 
-    ArbreB C = A+B;
+
+    ArbreB C = A;
+    C += B;
     cout << "Arbre C (addition de A et B):" << endl;
     C.Affiche(C.racine,0);
+    cout << "Arbre A : \n";
     A.Affiche(A.racine,0);
 
-
     cout << "\n\n";
-    if (A == C) cout << "l'arbre A est identique à l'arbre binaire B \n";
-    else cout << "A est different de B \n";
+    if (A == C) cout << "l'arbre A est identique à l'arbre binaire C \n";
+    else cout << "A est different de C \n";
 
 
     cout << "nb de sommet de l'arbre B : " << B.getNbSommet() << endl;
@@ -82,6 +84,33 @@ int main(int argc, char *argv[])
     nouv.Affiche(nouv.racine, 0);
     cout << "Arbre test après décomposition de nouv : \n";
     test.Affiche(test.racine, 0);
+
+    // recopie :
+    ArbreB recopie(C), Cbis;
+    cout << "Arbre recopie : \n";
+    recopie.Affiche(recopie.racine, 0);
+
+    C.decomposition(Cbis, 9);
+    cout << "decomposition de l'arbre C : \n";
+    C.Affiche(C.racine, 0);
+    cout << "nb sommet de C : " << C.getNbSommet() << endl;
+    cout << "Cbis l'arbre produit : \n";
+    Cbis.Affiche(Cbis.racine, 0);
+    cout << "nb sommet Cbis : " << Cbis.getNbSommet() << endl;
+
+    Cbis += B;
+    cout << "l'arbre Cbis + l'arbre B : \n";
+    Cbis.Affiche(Cbis.racine, 0);
+
+
+
+    nouv.additionEtiquettes(test);
+    cout << "Addition des etiquettes des arbres nouv et test : \n";
+    nouv.Affiche(nouv.racine, 0);
+    cout << "arbre test : \n";
+    test.Affiche(test.racine, 0);
+
+    cout << "-------------------------------------------------- \n";
 
 
 

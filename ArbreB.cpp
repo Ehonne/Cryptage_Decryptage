@@ -12,11 +12,34 @@
 
 using namespace std;
 
+// CONSTRUCTEUR :
 ArbreB::ArbreB() {
     racine = NULL;
     nbSommet = 0;
 }
 
+// CONSTRUCTEUR PAR RECOPIE :
+ArbreB::ArbreB(ArbreB & cible)
+{
+    racine = NULL;
+    if (cible.racine)
+    {
+        cible.parcoursPrefixe(cible.racine);
+        for(int i(0); i<cible.getNbSommet(); ++i)
+        {
+            Ajouter(cible.pile[i]);
+        }
+        cible.pile.clear();
+    }
+    else
+    {
+        nbSommet = 0;
+        racine = NULL;
+    }
+
+}
+
+//
 void ArbreB::DestroyRecursive(Sommet *B)
 {
        if (B)
@@ -26,14 +49,16 @@ void ArbreB::DestroyRecursive(Sommet *B)
            delete B;
        }
 }
+
+// DESTRUCTEUR :
 ArbreB::~ArbreB() {
     //cout << "Appel des destructeurs" << endl;
     DestroyRecursive(racine);
-
 }
 
+
 // getter and setter :
-int ArbreB::getNbSommet()
+int ArbreB::getNbSommet() const
 {
     return nbSommet;
 }
@@ -43,7 +68,7 @@ void ArbreB::setNbSommet(int val)
     nbSommet = val;
 }
 
-
+// AFFICHE ARBRE :
 void ArbreB::Affiche(Sommet *courant, int prof)
 {
      int i;
@@ -59,6 +84,7 @@ void ArbreB::Affiche(Sommet *courant, int prof)
 
 }
 
+//
 void ArbreB::Ajouter(int val)
 {
     // on incrémente le nombre de sommet de l'arbre :
@@ -74,6 +100,7 @@ void ArbreB::Ajouter(int val)
     Inserer(nouveau_sommet);
 }
 
+// AJOUT D'UN SOMMET :
 void ArbreB::Inserer(Sommet * nouveau)
 {
     int cpt = 1;
@@ -113,7 +140,7 @@ void ArbreB::Inserer(Sommet * nouveau)
     return;
 }
 
-
+// SUPPRIME UN SOMMET :
 void ArbreB::Supprimer(Sommet * del)
 {
     Sommet * droite = del->fils_droite;
@@ -124,6 +151,7 @@ void ArbreB::Supprimer(Sommet * del)
     // Cas où l'on veut supprimer la racine :
     if(del == courant)
     {
+        --nbSommet;
         racine = droite;
         if (gauche != NULL)
         {
@@ -156,6 +184,7 @@ void ArbreB::Supprimer(Sommet * del)
     nbSommet--;
 }
 
+// RECHERCHE UN SOMMET :
 Sommet* ArbreB::Recherche(int val)
 {
     if (racine == NULL)		//Si l'arbre est vide, on sort FAUX
@@ -180,7 +209,7 @@ Sommet* ArbreB::Recherche(int val)
     return NULL;
 }
 
-
+// CHANGE L'ETIQUETTE D'UN SOMMET :
 void ArbreB::ModifierEtiquette(int val1, int val2)
 {
     Sommet * adn = Recherche(val1);
@@ -216,7 +245,26 @@ void ArbreB::ModifierEtiquette(int val1, int val2)
     }
 }
 
+Sommet* ArbreB::addition(Sommet * A, Sommet * B)
+{
+    if(!A) return NULL;
+    if(!B) return A;
+    else
+    {
+        A->valeur += B->valeur;
+        A->fils_gauche = addition(A->fils_gauche, B->fils_gauche);
+        A->fils_droite = addition(A->fils_droite, B->fils_droite);
+    }
+    return A;
+}
 
+// ADDITION ETIQUETTE :
+void ArbreB::additionEtiquettes(ArbreB &abr)
+{
+    racine = addition(racine, abr.racine);
+}
+
+// PARCOURS PREFIXE D'UN ARBRE :
 void ArbreB::parcoursPrefixe(Sommet *sommet)
 {
     if (sommet != NULL)
@@ -228,33 +276,35 @@ void ArbreB::parcoursPrefixe(Sommet *sommet)
     }
 }
 
-
-Sommet* addition(Sommet * A, Sommet *B)
+// FUSION DE DEUX ARBRES :
+ArbreB& ArbreB::fusion(ArbreB & abr)
 {
-    if (!A)
-        return B;
-    if (!B)
-        return A;
-    A->valeur += B->valeur;
-    A->fils_gauche = addition(A->fils_gauche, B->fils_gauche);
-    A->fils_droite = addition(A->fils_droite, B->fils_droite);
-    return A;
-}
-
-ArbreB operator+(ArbreB& A, ArbreB& B)
-{
-    //Création du nouvelle arbre
-    ArbreB Tempon;
-    Tempon = A;
-
-    B.parcoursPrefixe(B.racine);
-
-    for(int i(0); i<B.getNbSommet(); ++i)
+    if (abr.racine != NULL)
     {
-        Tempon.Ajouter(B.pile[i]);
+       abr.parcoursPrefixe(abr.racine);
+       for(int i(0); i<abr.getNbSommet(); ++i)
+       {
+          Ajouter(abr.pile[i]);
+       }
+       abr.pile.clear();
+       return *this;
+    }
+    else
+    {
+        cout << "erreur : arbre vide \n";
+        return *this;
     }
 
-    return Tempon;
+
+}
+
+
+
+// operateur += :
+ArbreB& ArbreB::operator+=(ArbreB &abr)
+{
+    fusion(abr);
+    return *this;
 }
 
 // operateur d'affectation :
@@ -265,10 +315,12 @@ ArbreB& ArbreB::operator=(ArbreB &abr)
     {
         for(int i(0); i<nbSommet; ++i)
         {
-            if (racine) Supprimer(racine);
+            Supprimer(racine);
         }
-        delete racine;
+        racine = NULL;
     }
+
+    racine = NULL;
 
     abr.parcoursPrefixe(abr.racine);
 
@@ -278,10 +330,12 @@ ArbreB& ArbreB::operator=(ArbreB &abr)
     }
 
     if(abr.racine != NULL) abr.pile.clear();
+    setNbSommet(abr.getNbSommet());
 
     return *this;
 }
 
+//
 bool operator==(ArbreB& abr1, ArbreB& abr2)
 {
     if (abr1.getNbSommet() != abr2.getNbSommet()) return false;
@@ -291,12 +345,19 @@ bool operator==(ArbreB& abr1, ArbreB& abr2)
 
         for(int i(0); i<abr1.getNbSommet(); ++i)
         {
-            if (abr1.pile[i] != abr2.pile[i]) return false;
+            if (abr1.pile[i] != abr2.pile[i]) {
+                abr1.pile.clear();
+                abr2.pile.clear();
+                return false;
+            }
         }
+        abr1.pile.clear();
+        abr2.pile.clear();
         return true;
     }
 }
 
+//
 bool operator != (ArbreB& abr1,  ArbreB& abr2)
 {
     return !(abr1 == abr2);
@@ -314,6 +375,7 @@ ArbreB& ArbreB::decomposition(ArbreB& abr, int valeur)
       parcoursPrefixe(ptr->fils_gauche);
     }
     else {
+        pile.clear();
         // on stocke les valeurs en dessous du sommet ptr :
         parcoursPrefixe(ptr);
     }
@@ -330,6 +392,7 @@ ArbreB& ArbreB::decomposition(ArbreB& abr, int valeur)
         Sommet * ancien = Recherche(pile[i]);
         if (ancien) Supprimer(ancien);
     }
+    pile.clear();
 
     // on retourne notre nouvel arbre :
     return *this;

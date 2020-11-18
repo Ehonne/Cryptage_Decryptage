@@ -13,30 +13,37 @@ using namespace std;
 
 class ArbreB {
 private:
-    int nbSommet;
+    int nbSommet;       // nombre de sommet dans un arbre
 public:
     Sommet *racine;		//Racine de l'arbre
     vector<int> pile;
 
-    ArbreB();
-    void DestroyRecursive(Sommet *B);
-    virtual ~ArbreB();
+    ArbreB();               // Constructeur
+    ArbreB(ArbreB & cible);  // Constructeur par recopie
 
-    int getNbSommet();
-    void setNbSommet(int val);
-    void Ajouter(int val);		// ajoute un sommet de valeur val
+    void DestroyRecursive(Sommet *B);
+    virtual ~ArbreB();                  // Destructeur
+
+    int getNbSommet() const;            // getter
+    void setNbSommet(int val);          // setter
+
+    void Ajouter(int val);         // ajoute un sommet de valeur val
     void Inserer(Sommet * nouveau);
     void Supprimer(Sommet * del);		// supprime un sommet
     Sommet* Recherche(int val);		// Recherche un sommet dans l'arbre
     void Affiche(Sommet * courant, int prof);   //Affiche dans le terminal
     void ModifierEtiquette(int val1, int val2);
 
-    // parcours préfixe :
-    void parcoursPrefixe(Sommet * sommet);
+    void additionEtiquettes(ArbreB & abr);       // addition des étiquettes de deux arbres
+    Sommet * addition(Sommet * A, Sommet * B);
+
+    void parcoursPrefixe(Sommet * sommet);      // parcours préfixe
+
+    ArbreB& fusion(ArbreB & abr);          // fusion de deux arbres
 
     // surcharge d'operateurs :
+    ArbreB& operator+=(ArbreB & abr);
     ArbreB& operator=(ArbreB& abr);
-    friend ArbreB operator+(ArbreB& A, ArbreB& B);
     friend bool operator==(ArbreB& abr1,  ArbreB& abr2);
     friend bool operator!=(ArbreB& abr1,  ArbreB& abr2);
 
