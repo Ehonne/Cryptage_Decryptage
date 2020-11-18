@@ -52,7 +52,7 @@ void ArbreB::DestroyRecursive(Sommet *B)
 
 // DESTRUCTEUR :
 ArbreB::~ArbreB() {
-    //cout << "Appel des destructeurs" << endl;
+    cout << "Appel des destructeurs" << endl;
     DestroyRecursive(racine);
 }
 
