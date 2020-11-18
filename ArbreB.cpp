@@ -27,8 +27,8 @@ void ArbreB::DestroyRecursive(Sommet *B)
        }
 }
 ArbreB::~ArbreB() {
-    //cout << "Appel des destructeurs" << endl;
-    DestroyRecursive(racine);
+    cout << "Appel des destructeurs" << endl;
+    //DestroyRecursive(racine);
 
 }
 

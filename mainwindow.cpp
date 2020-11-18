@@ -8,6 +8,16 @@
 #include <QPoint>
 
 using namespace std;
+ArbreB MainWindow::courant;
+ArbreB MainWindow::courant_ajout;
+ArbreB MainWindow::courant_supp;
+
+MainWindow::~MainWindow()
+{
+    delete m_bouton;
+    delete m_bouton_ajout;
+    delete m_bouton_supp;
+}
 
 //On fait un parcour en largeur de l'arbre de facons a le dessiner etage par etage. Pour se faire on stoke la racine de l'arbre dans une pile.
 // puis des que l'on va depiler on va dessiner le sommet avec son lien a son pere, puis on va ajouter ses fils dans la pile
@@ -312,30 +322,46 @@ void MainWindow::paintEvent(QPaintEvent *event)
 {
     //QPushButton::paintEvent(event);
     if(state_bouton){
+        //courant.Affiche(courant.racine,0);
         affiche_arbre(courant);
+        state_bouton = false;
     }
     if(state_bouton_ajout){
+        //courant_ajout.Affiche(courant_ajout.racine,0);
         affiche_arbre(courant_ajout);
+        state_bouton_ajout = false;
+
     }
     if(state_bouton_supp){
+        //courant_supp.Affiche(courant_supp.racine,0);
         affiche_arbre(courant_supp);
+        state_bouton_supp = false;
     }
-
 }
 
 void MainWindow::doPainting()
 {
+    cout << "Bouton Cliqué affiche" << endl;
     state_bouton = !state_bouton;
+    state_bouton_ajout = false;
+    state_bouton_supp = false;
     update();
 }
 void MainWindow::doPainting_ajout()
 {
+    cout << "Bouton Cliqué ajout" << endl;
     state_bouton_ajout = !state_bouton_ajout;
+    state_bouton = false;
+    state_bouton_supp = false;
     update();
 }
 void MainWindow::doPainting_supp()
 {
+    cout << "Bouton Cliqué supp" << endl;
     state_bouton_supp = !state_bouton_supp;
+    state_bouton_ajout = false;
+    state_bouton = false;
     update();
 }
+
 

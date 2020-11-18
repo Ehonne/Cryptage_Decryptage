@@ -11,10 +11,11 @@ class MainWindow : public QWidget
 {
     Q_OBJECT
 public:
-    ArbreB courant;
-    ArbreB courant_ajout;
-    ArbreB courant_supp;
+    static ArbreB courant;
+    static ArbreB courant_ajout;
+    static ArbreB courant_supp;
     MainWindow(QWidget* parent = 0);
+    ~MainWindow();
 
 protected:
     void paintEvent(QPaintEvent * event);
