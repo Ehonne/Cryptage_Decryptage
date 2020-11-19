@@ -120,5 +120,6 @@ int main(int argc, char *argv[])
     MainWindow w;
     w.show();
     a.exec();
+    cout << "FIN" << endl;
     return 0;
 }
