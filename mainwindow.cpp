@@ -11,17 +11,23 @@ using namespace std;
 ArbreB MainWindow::courant;
 ArbreB MainWindow::courant_ajout;
 ArbreB MainWindow::courant_supp;
+ArbreB MainWindow::courant_addi;
+ArbreB MainWindow::courant_A;
+ArbreB MainWindow::courant_fusion;
 
 MainWindow::~MainWindow()
 {
     delete m_bouton;
     delete m_bouton_ajout;
     delete m_bouton_supp;
+    delete m_bouton_A;
+    delete m_bouton_addi;
+    delete m_bouton_fusion;
 }
 
-//On fait un parcour en largeur de l'arbre de facons a le dessiner etage par etage. Pour se faire on stoke la racine de l'arbre dans une pile.
+//On fait un parcour en largeur de l'arbre de facons a le dessiner etage par etage. Pour se faire on stocke la racine de l'arbre dans une pile.
 // puis des que l'on va depiler on va dessiner le sommet avec son lien a son pere, puis on va ajouter ses fils dans la pile
-// Enfin pour des raisons d'affichage on rajoute des sommet fantome (sans valeur ni fils).
+// Enfin pour des raisons d'affichage on rajoute des sommets fantomes (sans valeur et sans fils).
 void MainWindow::affiche_arbre(ArbreB B)
 {
     int etage_2 = 125;
@@ -276,17 +282,33 @@ MainWindow::MainWindow(QWidget *parent)
     state_bouton = false;
     state_bouton_ajout = false;
     state_bouton_supp = false;
-    m_bouton = new QPushButton("Afficher Arbre", this);
-    m_bouton->setFont(QFont("Comic Sans MS", 10));
-    m_bouton->move(250, 550);
-    m_bouton_ajout = new QPushButton("Ajout valeur Arbre", this);
-    m_bouton_ajout->setFont(QFont("Comic Sans MS", 10));
-    m_bouton_ajout->move(50, 550);
-    m_bouton_supp = new QPushButton("Supprimer valeur Arbre", this);
-    m_bouton_supp->setFont(QFont("Comic Sans MS", 10));
-    m_bouton_supp->move(400, 550);
+    state_bouton_A = false;
+    state_bouton_addi = false;
+    state_bouton_fusion = false;
 
+    /*******************************************************/
+    //Bouton
+    m_bouton = new QPushButton("Afficher Arbre B", this);
+    m_bouton->setFont(QFont("Comic Sans MS", 9));
+    m_bouton->move(20, 550);
+    m_bouton_ajout = new QPushButton("Ajout valeur Arbre B", this);
+    m_bouton_ajout->setFont(QFont("Comic Sans MS", 9));
+    m_bouton_ajout->move(180, 550);
+    m_bouton_supp = new QPushButton("Supprimer valeur Arbre B", this);
+    m_bouton_supp->setFont(QFont("Comic Sans MS", 9));
+    m_bouton_supp->move(350, 550);
+    m_bouton_addi = new QPushButton("A + B", this);
+    m_bouton_addi->setFont(QFont("Comic Sans MS", 9));
+    m_bouton_addi->move(350, 500);
+    m_bouton_A = new QPushButton("Afficher Arbre A", this);
+    m_bouton_A->setFont(QFont("Comic Sans MS", 9));
+    m_bouton_A->move(20, 500);
+    m_bouton_fusion = new QPushButton("A fusion B", this);
+    m_bouton_fusion->setFont(QFont("Comic Sans MS", 9));
+    m_bouton_fusion->move(180, 500);
 
+    /**********************************************/
+    //Test pour l'affichage
     ArbreB B;
     B.Ajouter(5);
     B.Ajouter(8);
@@ -311,31 +333,53 @@ MainWindow::MainWindow(QWidget *parent)
     B.Supprimer(ptr);
     courant_supp = B;
 
+    ArbreB A;
+    A.Ajouter(15);      A.Ajouter(4);    A.Ajouter(18);
+    courant_A = A;
+
+    A.additionEtiquettes(courant);
+    courant_addi = A;
+
+    ArbreB C;
+    C.Ajouter(15);      C.Ajouter(4);    C.Ajouter(18);
+    C.fusion(courant);
+    courant_fusion = C;
 
     // Connexion du clic du bouton à l'affichage de l'arbre
     QObject::connect(m_bouton, SIGNAL(clicked()), this, SLOT(doPainting()));
     QObject::connect(m_bouton_ajout, SIGNAL(clicked()), this, SLOT(doPainting_ajout()));
     QObject::connect(m_bouton_supp, SIGNAL(clicked()), this, SLOT(doPainting_supp()));
+    QObject::connect(m_bouton_addi, SIGNAL(clicked()), this, SLOT(doPainting_addi()));
+    QObject::connect(m_bouton_A, SIGNAL(clicked()), this, SLOT(doPainting_A()));
+    QObject::connect(m_bouton_fusion, SIGNAL(clicked()), this, SLOT(doPainting_fusion()));
 }
 
 void MainWindow::paintEvent(QPaintEvent *event)
 {
-    //QPushButton::paintEvent(event);
     if(state_bouton){
-        //courant.Affiche(courant.racine,0);
         affiche_arbre(courant);
         state_bouton = false;
     }
     if(state_bouton_ajout){
-        //courant_ajout.Affiche(courant_ajout.racine,0);
         affiche_arbre(courant_ajout);
         state_bouton_ajout = false;
 
     }
     if(state_bouton_supp){
-        //courant_supp.Affiche(courant_supp.racine,0);
         affiche_arbre(courant_supp);
         state_bouton_supp = false;
+    }
+    if(state_bouton_addi){
+        affiche_arbre(courant_addi);
+        state_bouton_addi = false;
+    }
+    if(state_bouton_A){
+        affiche_arbre(courant_A);
+        state_bouton_A = false;
+    }
+    if(state_bouton_fusion){
+        affiche_arbre(courant_fusion);
+        state_bouton_fusion = false;
     }
 }
 
@@ -344,7 +388,10 @@ void MainWindow::doPainting()
     cout << "Bouton Cliqué affiche" << endl;
     state_bouton = !state_bouton;
     state_bouton_ajout = false;
+    state_bouton_A = false;
+    state_bouton_addi = false;
     state_bouton_supp = false;
+    state_bouton_fusion = false;
     update();
 }
 void MainWindow::doPainting_ajout()
@@ -353,6 +400,9 @@ void MainWindow::doPainting_ajout()
     state_bouton_ajout = !state_bouton_ajout;
     state_bouton = false;
     state_bouton_supp = false;
+    state_bouton_A = false;
+    state_bouton_addi = false;
+    state_bouton_fusion = false;
     update();
 }
 void MainWindow::doPainting_supp()
@@ -361,7 +411,42 @@ void MainWindow::doPainting_supp()
     state_bouton_supp = !state_bouton_supp;
     state_bouton_ajout = false;
     state_bouton = false;
+    state_bouton_A = false;
+    state_bouton_addi = false;
+    state_bouton_fusion = false;
     update();
 }
-
+void MainWindow::doPainting_addi()
+{
+    cout << "Bouton Cliqué Addi" << endl;
+    state_bouton_addi = !state_bouton_addi;
+    state_bouton_ajout = false;
+    state_bouton = false;
+    state_bouton_supp = false;
+    state_bouton_A = false;
+    state_bouton_fusion = false;
+    update();
+}
+void MainWindow::doPainting_A()
+{
+    cout << "Bouton Clique A" << endl;
+    state_bouton_A = !state_bouton_A;
+    state_bouton_ajout = false;
+    state_bouton = false;
+    state_bouton_supp = false;
+    state_bouton_addi = false;
+    state_bouton_fusion = false;
+    update();
+}
+void MainWindow::doPainting_fusion()
+{
+    cout << "Bouton Clique Fusion" << endl;
+    state_bouton_fusion = !state_bouton_fusion;
+    state_bouton_ajout = false;
+    state_bouton = false;
+    state_bouton_supp = false;
+    state_bouton_addi = false;
+    state_bouton_A = false;
+    update();
+}
 

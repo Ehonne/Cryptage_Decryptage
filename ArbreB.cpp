@@ -249,12 +249,9 @@ Sommet* ArbreB::addition(Sommet * A, Sommet * B)
 {
     if(!A) return NULL;
     if(!B) return A;
-    else
-    {
-        A->valeur += B->valeur;
-        A->fils_gauche = addition(A->fils_gauche, B->fils_gauche);
-        A->fils_droite = addition(A->fils_droite, B->fils_droite);
-    }
+    A->valeur += B->valeur;
+    A->fils_gauche = addition(A->fils_gauche, B->fils_gauche);
+    A->fils_droite = addition(A->fils_droite, B->fils_droite);
     return A;
 }
 
