@@ -12,12 +12,14 @@ SOURCES += \
     ArbreB.cpp \
     Sommet.cpp \
     main.cpp \
-    mainwindow.cpp
+    mainwindow.cpp \
+    occurence.cpp
 
 HEADERS += \
     ArbreB.h \
     Sommet.h \
-    mainwindow.h
+    mainwindow.h \
+    occurence.h
 
 FORMS += \
     mainwindow.ui
