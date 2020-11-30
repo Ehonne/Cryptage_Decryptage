@@ -54,6 +54,7 @@ void ArbreB::DestroyRecursive(Sommet *B)
 ArbreB::~ArbreB() {
     cout << "Appel des destructeurs" << endl;
     DestroyRecursive(racine);
+    racine = NULL;
 }
 
 
@@ -77,7 +78,7 @@ void ArbreB::Affiche(Sommet *courant, int prof)
          cout << "	";
      }
 
-     cout << courant->valeur << endl;
+     cout << courant->valeur << "_" <<courant->caractere << endl;
 
      if (courant->fils_droite) Affiche(courant->fils_droite, prof + 1);
      if (courant->fils_gauche) Affiche(courant->fils_gauche, prof + 1);
@@ -124,18 +125,19 @@ void ArbreB::Inserer(Sommet * nouveau)
     {
         cpt++;
         precedent = courant;
-        if (nouveau->valeur < courant->valeur)
-            courant = courant->fils_gauche;
-        else
+        if (courant->fils_droite == NULL)
             courant = courant->fils_droite;
+        else if (courant->fils_gauche == NULL)
+            courant = courant->fils_gauche;
+        else courant = courant->fils_droite;
     }
 
     nouveau->profondeur = cpt;
     //Maintenant on place le nouveau noeud dans la bonne branche
-    if(nouveau->valeur < precedent->valeur)
-        precedent->fils_gauche = nouveau;
-    else
+    if(precedent->fils_droite == NULL)
         precedent->fils_droite = nouveau;
+    else if(precedent->fils_gauche == NULL)
+        precedent->fils_gauche = nouveau;
 
     return;
 }
@@ -294,7 +296,6 @@ ArbreB& ArbreB::fusion(ArbreB & abr)
 
 
 }
-
 
 
 // operateur += :

@@ -16,6 +16,7 @@ private:
 
 
 public:
+    char caractere;      // caractere
     int profondeur;     //Profondeur du sommet
     int valeur;		//Valeur du sommet
     Sommet *fils_gauche;		//Sommet gauche

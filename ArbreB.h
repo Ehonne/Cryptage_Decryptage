@@ -41,6 +41,7 @@ public:
 
     ArbreB& fusion(ArbreB & abr);          // fusion de deux arbres
 
+
     // surcharge d'operateurs :
     ArbreB& operator+=(ArbreB & abr);
     ArbreB& operator=(ArbreB& abr);

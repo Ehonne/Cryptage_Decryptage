@@ -12,6 +12,7 @@
 int Sommet::compteurS(0);
 
 Sommet::Sommet() {
+    caractere = 0;
     valeur = 0;
     profondeur = 0;
     fils_droite = NULL;
