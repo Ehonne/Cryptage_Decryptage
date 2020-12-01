@@ -3,6 +3,7 @@
 #include <QApplication>
 #include "ArbreB.h"
 #include "iostream"
+#include <math.h>
 #include "occurence.h"
 
 using namespace std;
@@ -62,14 +63,27 @@ void min()
     T.push_back(nouv);
 }
 
+int calculTaille(int t)
+{
+    int i(-1), res(0);
+
+    while (res < t)
+    {
+        i++;
+        res = pow(2, i);
+    }
+    return i;
+}
+
 
 int main(int argc, char *argv[])
 {
     cout << "Bienvenue sur le projet"<< endl;
 
 
-    Occurence test("bonjour");
+    Occurence test("je suis ton pere");
     test.print_occurence();
+    int nb_lettres = (int)(test.arr.size());
 
     // création d'un tableau d'arbre :
     for(int i(0); i<(int)(test.arr.size()); ++i)
@@ -100,6 +114,19 @@ int main(int argc, char *argv[])
     ArbreB abr;
     abr.racine = T[0];
     abr.Affiche(abr.racine, 0);
+
+    // initialisation du tableau de code binaire d'un caractère :
+    string array;
+    array.resize(calculTaille(nb_lettres));
+
+    // initialisation du vecteur codage :
+    abr.remplirVecteur_codage(nb_lettres);
+    abr.parcoursHuffman(abr.racine, array, 0, test.arr);
+
+    for(int i(0); i<(int)(abr.codage.size()); ++i)
+    {
+        cout << test.arr[i] << " : "<< abr.codage[i] << endl;
+    }
 
 
     /*QApplication a(argc, argv);

@@ -8,6 +8,7 @@
 #ifndef ARBREB_H_
 #define ARBREB_H_
 #include "Sommet.h"
+#include <iostream>
 #include <vector>
 using namespace std;
 
@@ -16,7 +17,8 @@ private:
     int nbSommet;       // nombre de sommet dans un arbre
 public:
     Sommet *racine;		//Racine de l'arbre
-    vector<int> pile;
+    vector<int> pile;   // pile pour contenir les étiquettes de l'arbre
+    vector<string> codage;       // liste de codage pour chaque caractères
 
     ArbreB();               // Constructeur
     ArbreB(ArbreB & cible);  // Constructeur par recopie
@@ -40,6 +42,9 @@ public:
     void parcoursPrefixe(Sommet * sommet);      // parcours préfixe
 
     ArbreB& fusion(ArbreB & abr);          // fusion de deux arbres
+
+    void parcoursHuffman(Sommet * sommet, string array, int index, vector<char> v);
+    void remplirVecteur_codage(int taille);
 
 
     // surcharge d'operateurs :

@@ -297,6 +297,47 @@ ArbreB& ArbreB::fusion(ArbreB & abr)
 
 }
 
+// parcours pour récupérer le codage binaire des caractères :
+void ArbreB::parcoursHuffman(Sommet *sommet, string array, int index, vector<char> v)
+{
+
+
+    if (sommet->fils_gauche)
+    {
+        array[index] = '0';
+        parcoursHuffman(sommet->fils_gauche, array, index+1, v);
+    }
+
+    if(sommet->fils_droite)
+    {
+        array[index] = '1';
+        parcoursHuffman(sommet->fils_droite, array, index+1, v);
+    }
+
+    // si le sommet actuel est une feuille de l'arbre :
+    if ((!sommet->fils_droite) and (!sommet->fils_gauche))
+    {
+        // on récupère l'indice dans vecteur occurence :
+        for(int i(0); i<(int)(v.size()); ++i)
+        {
+            if(v[i] == sommet->caractere)
+            {
+                codage[i] = array;
+                break;
+            }
+        }
+    }
+}
+
+// pour Initialiser le vecteur codage :
+void ArbreB::remplirVecteur_codage(int taille)
+{
+    for(int i(0); i<taille; ++i)
+    {
+        codage.push_back("");
+    }
+}
+
 
 // operateur += :
 ArbreB& ArbreB::operator+=(ArbreB &abr)
