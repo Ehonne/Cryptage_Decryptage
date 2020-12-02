@@ -10,6 +10,7 @@
 #include "Sommet.h"
 #include <iostream>
 #include <vector>
+#include <iostream>
 using namespace std;
 
 class ArbreB {
@@ -19,6 +20,7 @@ public:
     Sommet *racine;		//Racine de l'arbre
     vector<int> pile;   // pile pour contenir les étiquettes de l'arbre
     vector<string> codage;       // liste de codage pour chaque caractères
+
 
     ArbreB();               // Constructeur
     ArbreB(ArbreB & cible);  // Constructeur par recopie

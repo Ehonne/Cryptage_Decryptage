@@ -26,7 +26,7 @@ Occurence::Occurence(string str)
 
 void Occurence::print_occurence()
 {
-    for (int i = 0; i < this->arr.size(); i++)
+    for (int i = 0; i < (int)this->arr.size(); i++)
     {
         cout << this->arr[i] << this->frequence[i] << " || ";
     }

@@ -77,7 +77,6 @@ void ArbreB::Affiche(Sommet *courant, int prof)
      {
          cout << "	";
      }
-
      cout << courant->valeur << "_" <<courant->caractere << endl;
 
      if (courant->fils_droite) Affiche(courant->fils_droite, prof + 1);

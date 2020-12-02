@@ -11,6 +11,7 @@ CONFIG += c++11
 SOURCES += \
     ArbreB.cpp \
     Sommet.cpp \
+    abrwindow.cpp \
     main.cpp \
     mainwindow.cpp \
     occurence.cpp
@@ -18,10 +19,12 @@ SOURCES += \
 HEADERS += \
     ArbreB.h \
     Sommet.h \
+    abrwindow.h \
     mainwindow.h \
     occurence.h
 
 FORMS += \
+    abrwindow.ui \
     mainwindow.ui
 
 # Default rules for deployment.

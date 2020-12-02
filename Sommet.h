@@ -19,6 +19,8 @@ public:
     char caractere;      // caractere
     int profondeur;     //Profondeur du sommet
     int valeur;		//Valeur du sommet
+    double x;
+    double y;
     Sommet *fils_gauche;		//Sommet gauche
     Sommet *fils_droite;		//Sommet droite
     Sommet();
