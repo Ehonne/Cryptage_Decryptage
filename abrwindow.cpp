@@ -9,8 +9,8 @@
 #include <QPoint>
 #include <QBrush>
 
-static int WIDTH  = 800;
-static int VSPACE = 50;
+int WIDTH  = 800;
+int VSPACE = 50;
 
 vector<Sommet *> T;
 
@@ -72,6 +72,9 @@ AbrWindow::AbrWindow(string bobo, QWidget *parent) : QDialog(parent), ui(new Ui:
     ui->setupUi(this);
 
     mots = bobo;
+    WIDTH = mots.size() * 47;
+
+    setFixedWidth(WIDTH);
 }
 void drawGraph(Sommet *node, QPainter *painter){
 

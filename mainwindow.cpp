@@ -10,6 +10,7 @@
 #include <QPoint>
 #include <QBrush>
 #include "abrwindow.h"
+#include <QMessageBox>
 #include<bits/stdc++.h>
 
 using namespace std;
@@ -100,6 +101,16 @@ void MainWindow::doPainting()
     string str = text.toStdString();
     std::transform(str.begin(),str.end(),str.begin(),::tolower); //Convertion to lower case
     Occurence test(str);
+    int cpt = 0;
+    for(int i = 0; i < (int)test.frequence.size(); i++)
+    {
+        cpt = cpt + test.frequence[i];
+    }
+    if(cpt != (int)str.size())
+    {
+        QMessageBox::critical(this, "Erreur de saisie", "Caractere non reconnu !");
+    }
+
     test.print_occurence();
 
 }
@@ -110,7 +121,16 @@ void MainWindow::Affiche_nouv_texte()
     string str = text.toStdString();
     std::transform(str.begin(),str.end(),str.begin(),::tolower); //Convertion to lower case
     Occurence test(str);
-
+    int cpt = 0;
+    for(int i = 0; i < (int)test.frequence.size(); i++)
+    {
+        cpt = cpt + test.frequence[i];
+    }
+    if(cpt != (int)str.size())
+    {
+        QMessageBox::critical(this, "Erreur de saisie", "Caractere non reconnu !");
+        return;
+    }
 
     int nb_lettres = (int)(test.arr.size());
 
@@ -163,9 +183,20 @@ void MainWindow::Affiche_nouv_texte()
 
 void MainWindow::Affiche_ABR()
 {
-
     string str = ui->textEdit->toPlainText().toStdString();
     std::transform(str.begin(),str.end(),str.begin(),::tolower); //Convertion to lower case
+    Occurence test(str);
+    int cpt = 0;
+    for(int i = 0; i < (int)test.frequence.size(); i++)
+    {
+        cpt = cpt + test.frequence[i];
+    }
+    if(cpt != (int)str.size())
+    {
+        QMessageBox::critical(this, "Erreur de saisie", "Caractere non reconnu !");
+        return;
+    }
+
     AbrWindow secWind(str);   //creation de la nouvelle fenettre
     secWind.setModal(true);        //Met la fenetre en priorité elevé
     secWind.exec();
