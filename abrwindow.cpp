@@ -73,9 +73,9 @@ AbrWindow::AbrWindow(string bobo, QWidget *parent) : QDialog(parent), ui(new Ui:
 
     mots = bobo;
     WIDTH = mots.size() * 47;
-
     setFixedWidth(WIDTH);
 }
+
 void drawGraph(Sommet *node, QPainter *painter){
 
     QString test(QChar(node->caractere));

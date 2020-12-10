@@ -1,6 +1,5 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
-#include "QPainter"
 #include <iostream>
 #include <ArbreB.h>
 #include "occurence.h"
@@ -8,14 +7,10 @@
 #include <Sommet.h>
 #include <math.h>
 #include <QPoint>
-#include <QBrush>
 #include "abrwindow.h"
 #include <QMessageBox>
-#include<bits/stdc++.h>
 
 using namespace std;
-
-
 
 
 vector<Sommet *> TT;
@@ -98,6 +93,11 @@ MainWindow::MainWindow(QWidget *parent) :  QMainWindow(parent), ui(new Ui::MainW
 void MainWindow::doPainting()
 {
     QString text = ui->textEdit->toPlainText();
+    if(text.isEmpty())
+    {
+        QMessageBox::critical(this, "Erreur de saisie", "Vous n'avez pas saisie de texte !");
+        return;
+    }
     string str = text.toStdString();
     std::transform(str.begin(),str.end(),str.begin(),::tolower); //Convertion to lower case
     Occurence test(str);
@@ -118,6 +118,11 @@ void MainWindow::doPainting()
 void MainWindow::Affiche_nouv_texte()
 {
     QString text = ui->textEdit->toPlainText();
+    if(text.isEmpty())
+    {
+        QMessageBox::critical(this, "Erreur de saisie", "Vous n'avez pas saisie de texte !");
+        return;
+    }
     string str = text.toStdString();
     std::transform(str.begin(),str.end(),str.begin(),::tolower); //Convertion to lower case
     Occurence test(str);
@@ -184,6 +189,11 @@ void MainWindow::Affiche_nouv_texte()
 void MainWindow::Affiche_ABR()
 {
     string str = ui->textEdit->toPlainText().toStdString();
+    if(str.empty())
+    {
+        QMessageBox::critical(this, "Erreur de saisie", "Vous n'avez pas saisie de texte !");
+        return;
+    }
     std::transform(str.begin(),str.end(),str.begin(),::tolower); //Convertion to lower case
     Occurence test(str);
     int cpt = 0;
