@@ -109,6 +109,7 @@ void MainWindow::doPainting()
     if(cpt != (int)str.size())
     {
         QMessageBox::critical(this, "Erreur de saisie", "Caractere non reconnu !");
+        return;
     }
 
     test.print_occurence();
