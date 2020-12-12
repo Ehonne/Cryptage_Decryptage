@@ -51,6 +51,9 @@ p, li { white-space: pre-wrap; }
     </property>
    </widget>
    <widget class="QPushButton" name="Affiche_nouv">
+    <property name="enabled">
+     <bool>true</bool>
+    </property>
     <property name="geometry">
      <rect>
       <x>110</x>
@@ -73,10 +76,13 @@ p, li { white-space: pre-wrap; }
      </rect>
     </property>
     <property name="text">
-     <string>Crypter</string>
+     <string>Table de cryptage</string>
     </property>
    </widget>
    <widget class="QPushButton" name="Affiche_Arbre">
+    <property name="enabled">
+     <bool>true</bool>
+    </property>
     <property name="geometry">
      <rect>
       <x>530</x>
@@ -86,7 +92,7 @@ p, li { white-space: pre-wrap; }
      </rect>
     </property>
     <property name="text">
-     <string>Affiche Arbre</string>
+     <string>Arbre de cryptage</string>
     </property>
    </widget>
   </widget>

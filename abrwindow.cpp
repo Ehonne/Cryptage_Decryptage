@@ -105,7 +105,6 @@ void AbrWindow::paintEvent(QPaintEvent *event)
         QPainter painter(this);
         QString text = QString::fromStdString(mots);
         Occurence test(text.toStdString());
-        test.print_occurence();
 
             // création d'un tableau d'arbre :
         for(int i(0); i<(int)(test.arr.size()); ++i)
@@ -124,7 +123,6 @@ void AbrWindow::paintEvent(QPaintEvent *event)
 
         abr.racine->y = VSPACE;
         abr.racine->x = WIDTH/2.0;
-        cout << WIDTH/2.0 << endl;
         abr.racine->profondeur = 1;
         if(abr.racine != NULL){
             drawGraph(abr.racine, &painter);

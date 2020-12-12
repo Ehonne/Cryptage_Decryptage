@@ -112,6 +112,38 @@ void MainWindow::doPainting()
     }
 
     test.print_occurence();
+    int nb_lettres = (int)(test.arr.size());
+
+    // création d'un tableau d'arbre :
+    for(int i(0); i<(int)(test.arr.size()); ++i)
+    {
+        TT.push_back(ajout_sommet(test.frequence[i], test.arr[i]));
+    }
+
+    // boucle tant que la taille du vecteur n'est pas égale à 1
+    while((int)(TT.size()) > 1)
+    {
+        min();
+    }
+    ArbreB abr;
+    abr.racine = TT[0];
+    //abr.Affiche(abr.racine, 0);
+
+    // initialisation du tableau de code binaire d'un caractère :
+    string array;
+    array.resize(calculTaille(nb_lettres));
+
+       // initialisation du vecteur codage :
+    abr.remplirVecteur_codage(nb_lettres);
+    abr.parcoursHuffman(abr.racine, array, 0, test.arr);
+
+    //Affiche table de cryptage
+    for(int i(0); i<(int)(abr.codage.size()); ++i)
+    {
+        cout << test.arr[i] << " : "<< abr.codage[i] << endl;
+    }
+
+     TT.clear();
 
 }
 
@@ -164,12 +196,6 @@ void MainWindow::Affiche_nouv_texte()
        // initialisation du vecteur codage :
     abr.remplirVecteur_codage(nb_lettres);
     abr.parcoursHuffman(abr.racine, array, 0, test.arr);
-
-    //Affiche table de cryptage
-    /*for(int i(0); i<(int)(abr.codage.size()); ++i)
-    {
-        cout << test.arr[i] << " : "<< abr.codage[i] << endl;
-    }*/
 
     string text_code = "";  //creation du code binaire
     for(int i = 0; i < (int) text.toStdString().size(); i++)    //On parcours notre texte depart
