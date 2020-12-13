@@ -112,7 +112,8 @@ void MainWindow::doPainting()
         return;
     }
 
-    test.print_occurence();
+    //Afficher occurence de chaque lettre
+    //test.print_occurence();
     int nb_lettres = (int)(test.arr.size());
 
     // création d'un tableau d'arbre :
@@ -139,12 +140,15 @@ void MainWindow::doPainting()
     abr.parcoursHuffman(abr.racine, array, 0, test.arr);
 
     //Affiche table de cryptage
+    string table_cryptage = "";
     for(int i(0); i<(int)(abr.codage.size()); ++i)
     {
-        cout << test.arr[i] << " : "<< abr.codage[i] << endl;
+        table_cryptage += test.arr[i];
+        table_cryptage += " : " + abr.codage[i] + "\n";
     }
-
-     TT.clear();
+    QString qstr = QString::fromStdString(table_cryptage);
+    ui->textBrowser->setText(qstr);
+    TT.clear();
 
 }
 
