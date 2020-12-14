@@ -50,7 +50,6 @@ void min()
     Sommet * s1 = recherche_min();
     Sommet * s2 = recherche_min();
 
-    //cout << endl;
     //fusion des deux sommets
     Sommet * nouv = new Sommet;
     nouv->valeur = s1->valeur+s2->valeur;
@@ -214,6 +213,7 @@ void MainWindow::Affiche_nouv_texte()
 
     QString qstr = QString::fromStdString(text_code);
     ui->textBrowser->setText(qstr);
+
     TT.clear();
 }
 

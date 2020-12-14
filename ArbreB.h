@@ -25,7 +25,6 @@ public:
     ArbreB();               // Constructeur
     ArbreB(ArbreB & cible);  // Constructeur par recopie
 
-    void DestroyRecursive(Sommet *B);
     virtual ~ArbreB();                  // Destructeur
 
     int getNbSommet() const;            // getter

@@ -20,9 +20,12 @@ Sommet::Sommet() {
     ++compteurS;
 }
 
+
 Sommet::~Sommet() {
-    // TODO Auto-generated destructor stub
+    std::cout << "Appel destructeur sommet" << std::endl;
     --compteurS;
+    delete(fils_gauche);
+    delete(fils_droite);
 }
 
 

@@ -39,22 +39,11 @@ ArbreB::ArbreB(ArbreB & cible)
 
 }
 
-//
-void ArbreB::DestroyRecursive(Sommet *B)
-{
-       if (B)
-       {
-           DestroyRecursive(B->fils_gauche);
-           DestroyRecursive(B->fils_droite);
-           delete B;
-       }
-}
 
 // DESTRUCTEUR :
 ArbreB::~ArbreB() {
-    cout << "Appel des destructeurs" << endl;
-    DestroyRecursive(racine);
-    racine = NULL;
+    cout << "Appel des destructeurs Arbres" << endl;
+    delete(racine);
 }
 
 
