@@ -73,6 +73,7 @@ void ArbreB::Affiche(Sommet *courant, int prof)
 
 }
 
+/************************************************************/
 // Pour la partie décryptage :
 void ArbreB::AjouterCar(char c, string code)
 {
@@ -131,6 +132,34 @@ void ArbreB::AjouterCar(char c, string code)
 
     return;
 }
+
+
+//
+string ArbreB::decrypte(string message_code)
+{
+    string resultat = "";
+    vector<char> v(message_code.begin(), message_code.end());   // string --> vector
+    Sommet * courant = NULL;            // pointeur de sommet pour parcourir l'arbre
+    courant = racine;
+    for(int i(0); i<=(int)v.size(); ++i)
+    {
+        if(courant->fils_droite == NULL and courant->fils_gauche == NULL and courant->caractere != 0)  //si feuille
+        {
+            resultat.push_back(courant->caractere);
+            courant = racine;
+
+        }
+        if(v[i] == '0') courant = courant->fils_gauche;
+        else courant = courant->fils_droite;
+    }
+
+    return resultat;    // on retourne le texte décrypté
+}
+
+
+
+/***********************************************************************************/
+
 
 //
 void ArbreB::Ajouter(int val)

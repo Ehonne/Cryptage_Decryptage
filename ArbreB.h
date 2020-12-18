@@ -47,7 +47,8 @@ public:
     void parcoursHuffman(Sommet * sommet, string array, int index, vector<char> v);     // elle remplit le vecteur codage
     void remplirVecteur_codage(int taille);         // Initialise le vecteur codage
 
-    void AjouterCar(char c, string code);
+    void AjouterCar(char c, string code);   // crée un arbre à partir d'une table de codage
+    string decrypte(string message_code);
 
 
     // surcharge d'operateurs :
