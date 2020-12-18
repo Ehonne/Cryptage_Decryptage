@@ -30,7 +30,7 @@ public:
     int getNbSommet() const;            // getter
     void setNbSommet(int val);          // setter
 
-    void Ajouter(int val);         // ajoute un sommet de valeur val
+    void Ajouter(int valeur);         // ajoute un sommet de valeur val
     void Inserer(Sommet * nouveau);
     void Supprimer(Sommet * del);		// supprime un sommet
     Sommet* Recherche(int val);		// Recherche un sommet dans l'arbre
@@ -44,8 +44,10 @@ public:
 
     ArbreB& fusion(ArbreB & abr);          // fusion de deux arbres
 
-    void parcoursHuffman(Sommet * sommet, string array, int index, vector<char> v);
-    void remplirVecteur_codage(int taille);
+    void parcoursHuffman(Sommet * sommet, string array, int index, vector<char> v);     // elle remplit le vecteur codage
+    void remplirVecteur_codage(int taille);         // Initialise le vecteur codage
+
+    void AjouterCar(char c, string code);
 
 
     // surcharge d'operateurs :

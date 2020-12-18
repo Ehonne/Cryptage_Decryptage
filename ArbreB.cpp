@@ -73,6 +73,65 @@ void ArbreB::Affiche(Sommet *courant, int prof)
 
 }
 
+// Pour la partie décryptage :
+void ArbreB::AjouterCar(char c, string code)
+{
+
+    // on initialise deux sommets pour parcourir l'arbre :
+    Sommet * courant = racine;
+    Sommet * prec = NULL;
+
+    int cpt(0);     // le compteur pour la profondeur dans l'arbre
+
+    // on boucle sur le string code
+    while(cpt < (int)code.size())
+    {
+        // on cherche un sommet NULL
+        while(courant)
+        {
+            prec = courant;            // on conserve le pere du sommet courant
+            if(code[cpt] == '0')        // si le ième chiffre du code est 0, on passe à gauche
+            {
+                courant = courant->fils_gauche;
+                cpt++;     // on incrémente la profondeur
+            }
+            else if(code[cpt] == '1')       // si le ième chiffre du code est 1, on passe à droite
+            {
+                courant = courant->fils_droite;
+                cpt++;    // on incrémente la profondeur
+            }
+        }
+
+
+        // courant est null on ajoute donc un nouveau sommet
+
+        if(code[cpt-1] == '0')      // on est passé à gauche (0), on ajoute un sommet au fils gauche de prec
+        {
+            Sommet * nouveau = new Sommet;
+            nouveau->fils_droite = NULL;
+            nouveau->fils_gauche = NULL;
+            if(cpt == (int)code.size()) nouveau->caractere = c;     // si on atteint la profondeur max, on place notre caractère c
+            else nouveau->caractere = 0;                            // sinon 0
+            prec->fils_gauche = nouveau;
+            courant = prec->fils_gauche;
+        }
+
+        if(code[cpt-1] == '1')      // on est passé à droite (1), on ajoute un sommet au fils droite de prec
+        {
+            Sommet * nouveau2 = new Sommet;
+            nouveau2->fils_droite = NULL;
+            nouveau2->fils_gauche = NULL;
+            if(cpt == (int)code.size()) nouveau2->caractere = c;    // si on atteint la profondeur max, on place notre caractère c
+            else nouveau2->caractere = 0;                           // sinon 0
+            prec->fils_droite = nouveau2;
+            courant = prec->fils_droite;
+        }
+
+    }
+
+    return;
+}
+
 //
 void ArbreB::Ajouter(int val)
 {
@@ -83,7 +142,7 @@ void ArbreB::Ajouter(int val)
     Sommet * nouveau_sommet = new Sommet;
     nouveau_sommet->fils_gauche = NULL;
     nouveau_sommet->fils_droite = NULL;
-    nouveau_sommet->valeur = val;
+    nouveau_sommet->valeur  = val;
 
     //On insere le nouveau sommet dans l'arbre :
     Inserer(nouveau_sommet);
@@ -113,19 +172,16 @@ void ArbreB::Inserer(Sommet * nouveau)
     {
         cpt++;
         precedent = courant;
-        if (courant->fils_droite == NULL)
-            courant = courant->fils_droite;
-        else if (courant->fils_gauche == NULL)
-            courant = courant->fils_gauche;
-        else courant = courant->fils_droite;
+       if (nouveau->valeur < courant->valeur)
+           courant = courant->fils_gauche;
+       else courant = courant->fils_droite;
     }
 
     nouveau->profondeur = cpt;
     //Maintenant on place le nouveau noeud dans la bonne branche
-    if(precedent->fils_droite == NULL)
-        precedent->fils_droite = nouveau;
-    else if(precedent->fils_gauche == NULL)
+    if (nouveau->valeur < precedent->valeur)
         precedent->fils_gauche = nouveau;
+    else precedent->fils_droite = nouveau;
 
     return;
 }
