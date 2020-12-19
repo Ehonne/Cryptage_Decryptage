@@ -15,11 +15,18 @@ class MainWindow : public QMainWindow
     Q_OBJECT
 public:
     explicit MainWindow(QWidget* parent = 0);
+    bool test_erreur_decryptage();
+    bool test_erreur_cryptage();
 
 public slots:
+    void makecryptage();
+    void makedecryptage();
     void doPainting();
     void Affiche_nouv_texte();
     void Affiche_ABR();
+    void Affiche_table_decryptage();
+    void Affiche_nouv_texte_decrypte();
+    void Affiche_ABR_decryp();
 
 private:
      Ui::MainWindow *ui;

@@ -14,18 +14,21 @@ SOURCES += \
     abrwindow.cpp \
     main.cpp \
     mainwindow.cpp \
-    occurence.cpp
+    occurence.cpp \
+    tablecryptagewindow.cpp
 
 HEADERS += \
     ArbreB.h \
     Sommet.h \
     abrwindow.h \
     mainwindow.h \
-    occurence.h
+    occurence.h \
+    tablecryptagewindow.h
 
 FORMS += \
     abrwindow.ui \
-    mainwindow.ui
+    mainwindow.ui \
+    tablecryptagewindow.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

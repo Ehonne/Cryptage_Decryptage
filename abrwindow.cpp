@@ -72,10 +72,20 @@ AbrWindow::AbrWindow(string bobo, QWidget *parent) : QDialog(parent), ui(new Ui:
     ui->setupUi(this);
 
     mots = bobo;
+    mode = 1;
     WIDTH = mots.size() * 47;
     setFixedWidth(WIDTH);
 }
 
+AbrWindow::AbrWindow(map<char,string> huffman, QWidget *parent) : QDialog(parent), ui(new Ui::AbrWindow)
+{
+    ui->setupUi(this);
+
+    mode = 2;
+    huffmann = huffman;
+    WIDTH = huffmann.size() * 49;
+    resize(WIDTH,600);
+}
 void drawGraph(Sommet *node, QPainter *painter){
 
     QString test(QChar(node->caractere));
@@ -102,7 +112,10 @@ void drawGraph(Sommet *node, QPainter *painter){
 }
 void AbrWindow::paintEvent(QPaintEvent *event)
 {
-        QPainter painter(this);
+
+    QPainter painter(this);
+    if(mode == 1)
+    {
         QString text = QString::fromStdString(mots);
         Occurence test(text.toStdString());
 
@@ -126,8 +139,32 @@ void AbrWindow::paintEvent(QPaintEvent *event)
         abr.racine->profondeur = 1;
         if(abr.racine != NULL){
             drawGraph(abr.racine, &painter);
-    }
+        }
     T.clear();
+    }
+    if(mode == 2)
+    {
+        map<char, string>::iterator itr;
+
+        ArbreB abr;         // on initialise un nouvel arbre :
+        abr.Ajouter(0);     // on ajoute une racine d'étiquette (caractère) 0
+
+        // On construit l'arbre :
+        for (itr = huffmann.begin(); itr != huffmann.end(); ++itr)
+        {cout << itr->first << itr->second << endl;
+            abr.AjouterCar(itr->first, itr->second);    // on ajoute les sommets nécessaire pour pouvoir accéder au caractère itr->first
+                                                                // en utilisant le code binaire, c'est à dire itr->second
+        }
+        abr.Affiche(abr.racine,0);
+        abr.racine->y = VSPACE;
+        abr.racine->x = WIDTH/2.0;
+        abr.racine->profondeur = 1;
+        if(abr.racine != NULL){
+            drawGraph(abr.racine, &painter);
+        }
+    }
+
+
 }
 
 

@@ -149,8 +149,24 @@ string ArbreB::decrypte(string message_code)
             courant = racine;
 
         }
-        if(v[i] == '0') courant = courant->fils_gauche;
-        else courant = courant->fils_droite;
+        if(v[i] == '0')
+        {
+            if(courant->fils_gauche == NULL)
+            {
+                resultat.clear();
+                return resultat;
+            }
+            courant = courant->fils_gauche;
+        }
+        else
+        {
+            if(courant->fils_droite == NULL)
+            {
+                resultat.clear();
+                return resultat;
+            }
+            courant = courant->fils_droite;
+        }
     }
 
     return resultat;    // on retourne le texte décrypté
