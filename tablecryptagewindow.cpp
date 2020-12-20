@@ -47,6 +47,29 @@ void Tablecryptagewindow::Tablecryptage()
          huffman.insert(pair<char, string>(line[0],code_binaire));  //On rempli notre map avec le char et son code binaire
          j++;
     }
+    map<char, string>::iterator itr;
+    vector<string> toto;
+    for(itr = huffman.begin(); itr != huffman.end(); ++itr)
+    {
+        toto.push_back(itr->second);
+    }
+
+    for (int i = 0; i < (int)toto.size(); i++)
+    {
+        for(int j = i+1; j < (int)toto.size(); j++)
+        {
+            cout << toto[i] << toto[j] << endl;
+            if(toto[i] == toto[j])
+            {
+                QMessageBox::critical(this, "Erreur de saisie", "Erreur 2 caracteres ont le meme code binaire");
+                huffman.clear();
+                return;
+            }
+        }
+
+    }
+
+
     close();
 }
 

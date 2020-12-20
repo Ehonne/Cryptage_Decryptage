@@ -158,7 +158,7 @@ string ArbreB::decrypte(string message_code)
             }
             courant = courant->fils_gauche;
         }
-        else
+        if(v[i] == '1')
         {
             if(courant->fils_droite == NULL)
             {
@@ -167,6 +167,7 @@ string ArbreB::decrypte(string message_code)
             }
             courant = courant->fils_droite;
         }
+
     }
 
     return resultat;    // on retourne le texte décrypté
