@@ -420,7 +420,7 @@ void MainWindow::Affiche_nouv_texte_decrypte()
 
     if(chaineDecrypte.empty())
     {
-        QMessageBox::critical(this, "Erreur de saisie", "Aucun texte decryptage a partir de cette table de decryptage et de ce code bianire !");
+        QMessageBox::critical(this, "Erreur de saisie", "Aucun texte decryptage a partir de cette table de decryptage et de ce code binaire !");
         return;
     }
     QString qstr = QString::fromStdString(chaineDecrypte);

@@ -37,7 +37,7 @@ void Tablecryptagewindow::Tablecryptage()
         {
             if((line[i] != '0') && (line[i] != '1'))
             {
-                cout << "caractere :" << i << ":" << line[i] << "ligne :" << j << endl;
+                cout << "caractere :" << i << " :" << line[i] << "ligne :" << j << endl;
                 QMessageBox::critical(this, "Erreur de saisie", "Vérifiez que vous avez bien rentré des codes binaires ainsi que des caracteres autorisés. Attention aussi a avoir respecter la forme demandée.");
                 return;
              }
